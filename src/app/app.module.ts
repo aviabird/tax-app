@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import {MaterialModule} from '@angular/material';
+import { StoreModule } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
 import { InvestorDetailComponent } from './components/investor-detail/investor-detail.component';
@@ -15,6 +16,7 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { routes } from './routes';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { reducer } from './reducers';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import { FooterComponent } from './components/footer/footer.component';
     HttpModule,
     RouterModule.forRoot(routes),
     MaterialModule.forRoot(),
+    StoreModule.provideStore(reducer),
   ],
   providers: [],
   bootstrap: [AppComponent]
