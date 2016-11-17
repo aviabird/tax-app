@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import {MaterialModule} from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { InvestorDetailComponent } from './components/investor-detail/investor-detail.component';
@@ -31,6 +32,7 @@ import { FooterComponent } from './components/footer/footer.component';
     FormsModule,
     HttpModule,
     RouterModule.forRoot(routes),
+    MaterialModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
