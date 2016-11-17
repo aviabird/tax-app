@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Rx'; 
+import { Store  } from '@ngrx/store';
+
+import { Investor } from './../../models/investor';
+import * as fromRoot from './../../reducers'; 
 
 @Component({
   selector: 'ta-investor-detail',
@@ -6,8 +11,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./investor-detail.component.css']
 })
 export class InvestorDetailComponent implements OnInit {
+  investor: Observable<Investor>; 
 
-  constructor() { }
+  constructor(private store: Store<fromRoot.State> ) { }
 
   ngOnInit() {
   }
