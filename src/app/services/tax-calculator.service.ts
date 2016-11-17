@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { TaxSlabsService } from './tax-slabs.service'
-import { Slab } from '../models/slab'
-import { SalaryRange } from '../models/salary-range'   
+import { Observable } from 'rxjs/Observable';
+import { TaxSlabsService } from './tax-slabs.service';
+import { Slab } from '../models/slab';
+import { SalaryRange } from '../models/salary-range';
+
 @Injectable()
 export class TaxCalculatorService {
   slabs: Slab[];
-
   constructor(private taxSlabService: TaxSlabsService) { 
    this.slabs  = taxSlabService.getSlabs();
   }
@@ -15,6 +16,10 @@ export class TaxCalculatorService {
   taxReturn(income: number, age: number): any {
     var salaryRanges:SalaryRange[] = this.retriveSalaryRange(age);
     var initialTax =  this.calculateInitialTaxAmt(salaryRanges, income);
+    var surCharge  =  this.calcSurchargeIfAny(income, initialTax);
+    var eduCess    = this.calcEduCess(initialTax, surCharge);
+    var totalTax   = this.calcTotalTax(initialTax, eduCess, surCharge);
+    return totalTax;
 }
 
   // Retrive Salary Range in which the investor falls
@@ -77,6 +82,54 @@ export class TaxCalculatorService {
   // have no tax
   calcConstTax(minSal, maxSal, percentage): number{
     return ((maxSal - minSal) * percentage)
+  }
+
+  // Surcharge
+  // Calculates Surcharge if investor income
+  // is greater than 1 Cr;
+  // Surcharge of 15% is charged on tax
+  // if income is greater than 1 crore
+  // Else surcharge is 0%;
+  calcSurchargeIfAny(income, tax):number{
+    if (income < 10000000){
+      return 0
+    }
+    else{
+      var initialSurcharge = (tax * 0.15);
+      var finalSurcharge = this.checkForMarginalRelief(initialSurcharge, income, tax);
+      return finalSurcharge;
+    }
+  }
+
+  // Check if person falls under margianl relief by
+  // comparing incrementalIncome and initial_surcharge
+  // return the one that is less
+  checkForMarginalRelief(initialSurcharge, income, tax):number{
+    // income above 1 Cr.
+    var incrementalIncome = (income - 10000000)
+    if (incrementalIncome < initialSurcharge){
+      return incrementalIncome;
+    }
+    else{
+      return initialSurcharge;
+    }
+  }
+
+
+  // Education Cess
+  
+  // Calculates education cess on tax
+  // Default Education cess on tax in India is 3%
+  calcEduCess(initialTax, surCharge):number{
+    return ((initialTax + surCharge) * 0.03);
+  }
+
+  // Total tax
+
+  // Finnaly Add Educationl Cess , Surcharge to Inital tax
+  // and get Total Tax for the investor;
+  calcTotalTax(initialTax, eduCess, surCharge):number{
+    return (initialTax + eduCess + surCharge);
   }
 }
 // End
