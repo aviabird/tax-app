@@ -7,9 +7,12 @@ import { SalaryRange } from '../models/salary-range';
 @Injectable()
 export class TaxCalculatorService {
   slabs: Slab[];
+  // tax: Observable<number>;
+
   constructor(private taxSlabService: TaxSlabsService) { 
    this.slabs  = taxSlabService.getSlabs();
   }
+
 
   // This Function Calculates tax for investor
   // using his information i.e Age and Income
@@ -18,7 +21,7 @@ export class TaxCalculatorService {
     var initialTax =  this.calculateInitialTaxAmt(salaryRanges, income);
     var surCharge  =  this.calcSurchargeIfAny(income, initialTax);
     var eduCess    = this.calcEduCess(initialTax, surCharge);
-    var totalTax   = this.calcTotalTax(initialTax, eduCess, surCharge);
+    var totalTax  = Observable.from([this.calcTotalTax(initialTax, eduCess, surCharge)]);
     return totalTax;
 }
 
@@ -36,7 +39,7 @@ export class TaxCalculatorService {
   }
 
   // Calculate Initial Tax Amount i.e Tax excluding Edu Cess and Surrcharge
-  calculateInitialTaxAmt(salaryRanges: SalaryRange[], income: number){
+  calculateInitialTaxAmt(salaryRanges: SalaryRange[], income: number) {
     var remain_hash = {};
     var constTax:number = 0;
     var constDiffAmt:number = 0;
@@ -65,13 +68,13 @@ export class TaxCalculatorService {
   }
 
   // Constant Tax plus Tax for Current Salary Range
-  currentSalRangeTaxPlusConstTax(income, constDiffAmt, constTax, percentage):number{
+  currentSalRangeTaxPlusConstTax(income, constDiffAmt, constTax, percentage): number{
     return ((income - constDiffAmt) * percentage + constTax);
   }
 
   // Calculate Diff Amount between two ranges
   // E.g 25,0000 to 50,0000 = 25,00000 
-  calcConstDiffAmt(minSal, maxSal):number{
+  calcConstDiffAmt(minSal, maxSal): number{
     return (maxSal - minSal);
   }
 
@@ -80,7 +83,7 @@ export class TaxCalculatorService {
   // will always be 0
   //  that is first 2,50000 for all individuals will always  
   // have no tax
-  calcConstTax(minSal, maxSal, percentage): number{
+  calcConstTax(minSal: number, maxSal: number, percentage: number): number{
     return ((maxSal - minSal) * percentage)
   }
 
@@ -90,7 +93,7 @@ export class TaxCalculatorService {
   // Surcharge of 15% is charged on tax
   // if income is greater than 1 crore
   // Else surcharge is 0%;
-  calcSurchargeIfAny(income, tax):number{
+  calcSurchargeIfAny(income, tax): number{
     if (income < 10000000){
       return 0
     }
@@ -104,7 +107,7 @@ export class TaxCalculatorService {
   // Check if person falls under margianl relief by
   // comparing incrementalIncome and initial_surcharge
   // return the one that is less
-  checkForMarginalRelief(initialSurcharge, income, tax):number{
+  checkForMarginalRelief(initialSurcharge, income, tax): number{
     // income above 1 Cr.
     var incrementalIncome = (income - 10000000)
     if (incrementalIncome < initialSurcharge){
@@ -120,7 +123,7 @@ export class TaxCalculatorService {
   
   // Calculates education cess on tax
   // Default Education cess on tax in India is 3%
-  calcEduCess(initialTax, surCharge):number{
+  calcEduCess(initialTax, surCharge): number{
     return ((initialTax + surCharge) * 0.03);
   }
 
@@ -128,7 +131,7 @@ export class TaxCalculatorService {
 
   // Finnaly Add Educationl Cess , Surcharge to Inital tax
   // and get Total Tax for the investor;
-  calcTotalTax(initialTax, eduCess, surCharge):number{
+  calcTotalTax(initialTax, eduCess, surCharge): number{
     return (initialTax + eduCess + surCharge);
   }
 }
