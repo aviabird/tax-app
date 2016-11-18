@@ -60,6 +60,8 @@ export class TaxCalculatorService {
                                                   constTax,
                                                   salaryRange.percentage
                                                 )
+        console.log("Tax in Salary range is :", tax)
+        console.log("Calculating tax in salary range", salaryRange.maxSal);
         return tax;
       }
       else {
