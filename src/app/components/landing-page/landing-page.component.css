@@ -1,11 +1,4 @@
-md-card {
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0px 77px 35px -64px rgba(0, 0, 0, 0.4);
-	-webkit-transform: perspective(800px) rotateY(0deg) rotateX(45deg);
-	-moz-transform: perspective(800px) rotateY(0deg) rotateX(45deg);
-	-ms-transform: perspective(800px) rotateY(0deg) rotateX(45deg);
-	-o-transform: perspective(800px) rotateY(0deg) rotateX(45deg);
-	transform: perspective(800px) rotateY(0deg) rotateX(45deg);
+.md-pos {
   position: fixed;
   top: 30%;
   /* bring your own prefixes */

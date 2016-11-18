@@ -1,0 +1,7 @@
+md-card {
+  position: fixed;
+  top: 30%;
+  /* bring your own prefixes */
+  transform: translate(-11%);
+  box-shadow: 0px 40px 39px -22px rgba(0, 0, 0, 0.4);
+}

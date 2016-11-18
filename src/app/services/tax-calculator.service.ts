@@ -1,3 +1,4 @@
+import { Investor } from './../models/investor';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { TaxSlabsService } from './tax-slabs.service';
@@ -7,7 +8,7 @@ import { SalaryRange } from '../models/salary-range';
 @Injectable()
 export class TaxCalculatorService {
   slabs: Slab[];
-  // tax: Observable<number>;
+  // investor$: Observable<any>;
 
   constructor(private taxSlabService: TaxSlabsService) { 
    this.slabs  = taxSlabService.getSlabs();
@@ -17,11 +18,12 @@ export class TaxCalculatorService {
   // This Function Calculates tax for investor
   // using his information i.e Age and Income
   taxReturn(income: number, age: number): any {
-    var salaryRanges:SalaryRange[] = this.retriveSalaryRange(age);
+    var salaryRanges: SalaryRange[] = this.retriveSalaryRange(age);
     var initialTax =  this.calculateInitialTaxAmt(salaryRanges, income);
     var surCharge  =  this.calcSurchargeIfAny(income, initialTax);
     var eduCess    = this.calcEduCess(initialTax, surCharge);
-    var totalTax  = Observable.from([this.calcTotalTax(initialTax, eduCess, surCharge)]);
+    var totalTax  = this.calcTotalTax(initialTax, eduCess, surCharge);
+    // this.investor$.tax = totalTax;
     return totalTax;
 }
 
