@@ -1,4 +1,10 @@
-<md-card>
-  landing-page works!
-  <button [routerLink]="['/investor-detail']">Next</button>
+<md-card class="col-md-4 col-md-offset-4">
+  <md-card-content>
+      <md-card-title>Do You Want to Save taxes?</md-card-title>
+   </md-card-content>
+  
+  <button md-button class="btn-success" [routerLink]="['/investor-detail']">
+    Yes !! Why Not
+    <i class="fa fa-arrow-circle-right fa-2x" aria-hidden="true"> </i> 
+  </button>
 </md-card>

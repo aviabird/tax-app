@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 body{
-  background:  rgba(206, 206, 206, 0.5);
+  background-image:  url('http://clearskyibogaine.com/wp-content/uploads/2014/11/blurred-bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
 }

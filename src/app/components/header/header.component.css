@@ -1,0 +1,7 @@
+.navbar a{
+  color: white;
+}
+
+.navbar a::hover{
+  background: none;
+}

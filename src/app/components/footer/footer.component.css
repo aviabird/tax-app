@@ -1,3 +1,8 @@
 .navbar{
-  margin-top: 500px;
+  transform: translate(0, 80vh);
+  height: 10vh;
+}
+
+.navbar a{
+  color: white;
 }
