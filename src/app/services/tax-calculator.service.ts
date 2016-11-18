@@ -32,8 +32,11 @@ export class TaxCalculatorService {
     var salaryRange: SalaryRange[] = [];
     this.slabs.forEach(slab => {
       // Check for min-max age condition
-      slab.maxAge = (slab.maxAge == -1) ? Infinity: slab.maxAge;
-      if (slab.minAge <= age && age >= slab.maxAge){
+      slab.maxAge = (slab.maxAge == -1) ? Infinity:slab.maxAge;
+     
+      console.log("Slab maxAge is and age is" + slab.maxAge + " " + age);   
+      if(slab.minAge <= age && age <= slab.maxAge){
+        console.log("Found Slab Range and In If condition");
         salaryRange = slab.salaryRanges;
       }
     })
@@ -51,7 +54,7 @@ export class TaxCalculatorService {
       // Check for -1, if yes convert it to infinity
       salaryRange.maxSal = (salaryRange.maxSal == -1) ? Infinity: salaryRange.maxSal;
       
-      if (salaryRange.minSal <= income && income >= salaryRange.maxSal){
+      if (salaryRange.minSal <= income && income <= salaryRange.maxSal){
         tax = this.currentSalRangeTaxPlusConstTax(income,
                                                   constDiffAmt,
                                                   constTax,
