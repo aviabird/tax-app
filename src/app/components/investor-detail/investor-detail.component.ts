@@ -1,6 +1,8 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { ActionTypes } from './../../actions/investor';
 import 'rxjs/add/operator/let';
+import { CustomValidators } from 'ng2-validation';
+
 // import { CalculateTax } from './../../actions/investor';
 // import { Actions } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
@@ -48,11 +50,13 @@ export class InvestorDetailComponent implements OnInit {
   }
  
   onSubmit() {
-    let investor: Investor = this.sanitiseFormData();
-    // dispatch action here
-    // this.store.dispatch(new investor.CalculateTax(this.investorDetailForm.value));
-    this.store.dispatch({type: 'CALCULATE_TAX', payload: investor});
-    this.navigateToNextPage()
+    if (this.investorDetailForm.valid) {
+      let investor: Investor = this.sanitiseFormData();
+      // dispatch action here
+      // this.store.dispatch(new investor.CalculateTax(this.investorDetailForm.value));
+      this.store.dispatch({type: 'CALCULATE_TAX', payload: investor});
+      this.navigateToNextPage()
+    }
   }
 
   navigateBack() {
@@ -86,8 +90,8 @@ export class InvestorDetailComponent implements OnInit {
     // create form groups and their form controls
     console.log('creating form groups');    
     this.investorDetailForm = this.formBuilder.group({
-      'age':    [age, Validators.required],
-      'salary': [salary, Validators.required]
+      'age':    [age, [Validators.required, Validators.minLength(2), CustomValidators.number]],
+      'salary': [salary, [Validators.required, Validators.minLength(6), CustomValidators.number]]
     });
   }
 

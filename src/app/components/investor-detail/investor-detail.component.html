@@ -1,22 +1,30 @@
 <md-card class="col-md-10 col-md-offset-1 md-pos md-custom-shadow">
-  <button class="backButton pull-left" (click)="navigateBack()">Back</button>
+  <button class="backButton pull-left" (click)="navigateBack()" >Back</button>
   <h3>A little info about you and we'll help you save you taxes</h3>
   <br><br>
   <form class="form-inline" [formGroup]="investorDetailForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
+    <div class="form-group" 
+      [ngClass]="{'has-error': (investorDetailForm.get('age').invalid && investorDetailForm.get('age').touched)}" >
       <label class="sr-only" for="age">Age</label>
+      <!--Debugging info-->
+      <!--Invalid {{ investorDetailForm.get('age').invalid }}-->
+      <!--investorDetailForm.get('age').hasError('required') use this to show message -->
+      <!--Dirty {{ investorDetailForm.get('age').touched }}-->
+      <!--Debugging info-->      
       <input type="text" class="form-control" id="age" placeholder="Age" formControlName="age">
     </div>
-    <div class="form-group">
+    <div class="form-group"
+      [ngClass]="{'has-error': (investorDetailForm.get('salary').invalid && investorDetailForm.get('salary').touched)}" >
       <label class="sr-only" for="salary">Salary</label>
-      <input type="text" class="form-control" id="salary" placeholder="Salary" formControlName="salary">
+      <input type="text" class="form-control" id="salary" placeholder="Annual salary" formControlName="salary">
     </div>
     <div class="submit-button-group">
-      <button type="submit" class="btn btn-default calculateButton">Calculate tax</button>
+      <button 
+        type="submit" 
+        class="btn btn-default calculateButton"
+        [disabled]="!investorDetailForm.valid && investorDetailForm.dirty">
+        Calculate tax
+      </button>
     </div>
   </form>
-  <!--<div class="col-md-6">
-    <button [routerLink]="['/tax-detail']">Next</button>
-  </div>-->
-  
 </md-card>

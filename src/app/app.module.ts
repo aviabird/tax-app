@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { MaterialModule } from '@angular/material';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from "@ngrx/effects";
-import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppComponent } from './app.component';
 import { InvestorDetailComponent } from './components/investor-detail/investor-detail.component';
