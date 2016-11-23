@@ -1,4 +1,7 @@
 <md-card class="col-md-10 col-md-offset-1 md-pos md-custom-shadow">
+  <button class="backButton pull-left" (click)="navigateBack()">Back</button>
+  <h3>A little info about you and we'll help you save you taxes</h3>
+  <br><br>
   <form class="form-inline" [formGroup]="investorDetailForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label class="sr-only" for="age">Age</label>
@@ -8,12 +11,12 @@
       <label class="sr-only" for="salary">Salary</label>
       <input type="text" class="form-control" id="salary" placeholder="Salary" formControlName="salary">
     </div>
-    <button type="submit" class="btn btn-default">Calculate tax</button>
+    <div class="submit-button-group">
+      <button type="submit" class="btn btn-default calculateButton">Calculate tax</button>
+    </div>
   </form>
   <!--<div class="col-md-6">
     <button [routerLink]="['/tax-detail']">Next</button>
   </div>-->
-  <div class="col-md-6">
-    <button (click)="navigateBack()">Back</button>
-  </div>
+  
 </md-card>

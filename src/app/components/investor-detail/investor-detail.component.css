@@ -5,3 +5,55 @@ md-card {
   transform: translate(-11%);
   box-shadow: 0px 40px 39px -22px rgba(0, 0, 0, 0.4);
 }
+
+input {
+  height: 46px;
+  padding: 14px 30px;
+  font-size: 17px;
+}
+
+.submit-button-group {
+  margin-top: 10px;
+}
+
+.calculateButton {
+	-moz-box-shadow:inset 12px 4px 31px 7px #23395e;
+	-webkit-box-shadow:inset 12px 4px 31px 7px #23395e;
+	box-shadow:inset 12px 4px 31px 7px #23395e;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #2e466e), color-stop(1, #415989));
+	background:-moz-linear-gradient(top, #2e466e 5%, #415989 100%);
+	background:-webkit-linear-gradient(top, #2e466e 5%, #415989 100%);
+	background:-o-linear-gradient(top, #2e466e 5%, #415989 100%);
+	background:-ms-linear-gradient(top, #2e466e 5%, #415989 100%);
+	background:linear-gradient(to bottom, #2e466e 5%, #415989 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#2e466e', endColorstr='#415989',GradientType=0);
+	background-color:#2e466e;
+	-moz-border-radius:42px;
+	-webkit-border-radius:42px;
+	border-radius:42px;
+	border:1px solid #1f2f47;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	font-weight:bold;
+	padding:14px 76px;
+	text-decoration:none;
+	text-shadow:0px 0px 0px #263666;
+}
+.calculateButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #415989), color-stop(1, #2e466e));
+	background:-moz-linear-gradient(top, #415989 5%, #2e466e 100%);
+	background:-webkit-linear-gradient(top, #415989 5%, #2e466e 100%);
+	background:-o-linear-gradient(top, #415989 5%, #2e466e 100%);
+	background:-ms-linear-gradient(top, #415989 5%, #2e466e 100%);
+	background:linear-gradient(to bottom, #415989 5%, #2e466e 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#415989', endColorstr='#2e466e',GradientType=0);
+	background-color:#415989;
+}
+.calculateButton:active {
+	position:relative;
+	top:1px;
+}
+
