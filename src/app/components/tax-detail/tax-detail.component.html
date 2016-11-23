@@ -1,5 +1,12 @@
-<md-card>
-  <label >Tax </label>
-  {{ (investor$ | async).tax }}
-  <button [routerLink]="['/elss-detail']">Next</button>
+<md-card class="col-md-10 col-md-offset-1 md-pos md-custom-shadow">
+  <div *ngIf="tax">
+    <h3 >Estimated Tax</h3><h2>{{ (investor$ | async).tax }}</h2>
+    <div>
+      <h3>Did you know you could bring this down to</h3> <h2>{{ reducedTax }}</h2>
+    </div>
+    <button class="primaryButton" [routerLink]="['/elss-detail']">Tell me how???</button>
+  </div>
+  <div *ngIf="!tax">
+    <button class="primaryButton" (click)="goBack()">Add your tax information</button>
+  </div>
 </md-card>

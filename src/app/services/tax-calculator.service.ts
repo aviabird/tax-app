@@ -22,7 +22,7 @@ export class TaxCalculatorService {
     var initialTax =  this.calculateInitialTaxAmt(salaryRanges, income);
     var surCharge  =  this.calcSurchargeIfAny(income, initialTax);
     var eduCess    = this.calcEduCess(initialTax, surCharge);
-    var totalTax  = this.calcTotalTax(initialTax, eduCess, surCharge);
+    var totalTax  = Math.floor(this.calcTotalTax(initialTax, eduCess, surCharge));
     // this.investor$.tax = totalTax;
     return totalTax;
   }
