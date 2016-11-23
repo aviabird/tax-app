@@ -1,4 +1,5 @@
 <md-card>
-  tax-detail works!
+  <label >Tax </label>
+  {{ (investor$ | async).tax }}
   <button [routerLink]="['/elss-detail']">Next</button>
 </md-card>

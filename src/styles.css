@@ -1,9 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
 body{
-  background-image:  url('http://clearskyibogaine.com/wp-content/uploads/2014/11/blurred-bg.jpg');
-  background-size: cover;
+  background-image:  url('./assets/background.jpg');
+  background-size: initial;
   background-repeat: no-repeat;
+  font-family: 'Raleway', sans-serif;
 }
 
 .md-custom-shadow {

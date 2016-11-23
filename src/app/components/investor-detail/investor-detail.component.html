@@ -10,5 +10,10 @@
     </div>
     <button type="submit" class="btn btn-default">Calculate tax</button>
   </form>
-  <button [routerLink]="['/tax-detail']">Next</button>
+  <!--<div class="col-md-6">
+    <button [routerLink]="['/tax-detail']">Next</button>
+  </div>-->
+  <div class="col-md-6">
+    <button (click)="navigateBack()">Back</button>
+  </div>
 </md-card>

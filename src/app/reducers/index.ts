@@ -1,6 +1,8 @@
+import { Observable } from 'rxjs/Rx';
 import { ActionReducer } from '@ngrx/store';
 import { compose } from '@ngrx/core/compose';
 import { combineReducers } from '@ngrx/store';
+import '@ngrx/core/add/operator/select';
 
 
 import * as fromInvestors from './investor';
@@ -20,3 +22,13 @@ const developmentReducer: ActionReducer<State> = compose(combineReducers)(reduce
 export function reducer(state: any, action: any) {
     return developmentReducer(state, action);
 }
+
+// 
+
+// should return investor state
+export const getInvestorState = (state$: Observable<State>) =>
+    state$.select(s => s.investor);
+
+
+// should return investor data
+export const getInvestorData = compose(fromInvestors.getInvestorData, getInvestorState);

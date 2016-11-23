@@ -25,7 +25,7 @@ export class TaxCalculatorService {
     var totalTax  = this.calcTotalTax(initialTax, eduCess, surCharge);
     // this.investor$.tax = totalTax;
     return totalTax;
-}
+  }
 
   // Retrive Salary Range in which the investor falls
   retriveSalaryRange(age: number): SalaryRange[] {
